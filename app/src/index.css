@@ -62,17 +62,10 @@ body {
   gap: 0.75rem;
 }
 
-.header-bar .logo-placeholder {
-  width: 32px;
-  height: 32px;
-  background-color: var(--secondary-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: var(--primary-color);
-  font-size: 1rem;
+.app-logo {
+  height: 36px;
+  width: auto;
+  border-radius: 4px;
 }
 
 /* Split Pane Layout */
@@ -268,6 +261,12 @@ textarea.form-input {
 .doc-header {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+.doc-logo {
+  height: 80px;
+  width: auto;
+  margin-bottom: 1.5rem;
 }
 
 .doc-header h1 {
