@@ -28,7 +28,9 @@
       "Bash(pipx list *)",
       "Bash(findstr /i \"image\")",
       "Bash(pipx runpip *)",
-      "Bash(dir C:\\\\Users\\\\User\\\\pipx\\\\venvs\\\\imagesorcery-mcp\\\\Scripts\\\\imagesorcery-mcp* *)"
+      "Bash(dir C:\\\\Users\\\\User\\\\pipx\\\\venvs\\\\imagesorcery-mcp\\\\Scripts\\\\imagesorcery-mcp* *)",
+      "Read(//c/Users/User/**)",
+      "Bash(cat %USERPROFILE%\\\\.claude.json)"
     ]
   }
 }
