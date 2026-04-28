@@ -238,7 +238,7 @@ function App() {
               <div className="doc-section">
                 <div className="doc-section-title">BAHAGIAN A: MAKLUMAT PROGRAM</div>
                 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">1.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Pengenalan</div>
@@ -246,7 +246,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">2.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Objektif</div>
@@ -258,7 +258,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">3.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Butiran Program</div>
@@ -277,7 +277,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">4.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Keterangan Jemputan</div>
@@ -296,7 +296,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">5.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Implikasi Kewangan</div>
@@ -319,7 +319,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">6.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Implikasi Perbelanjaan Anggota</div>
@@ -327,7 +327,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="doc-item">
+                <div className="doc-item doc-box">
                   <div className="doc-item-num">7.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Anggaran Pulangan Pelaburan (ROI)</div>
@@ -340,7 +340,8 @@ function App() {
               <div className="doc-section" style={{ pageBreakBefore: 'always' }}>
                 <div className="doc-section-title">BAHAGIAN B: PENGESYORAN & SOKONGAN</div>
                 
-                <div className="doc-signatures">
+                <div className="doc-box">
+                  <div className="doc-signatures" style={{ marginTop: 0 }}>
                   <div className="doc-signature-block">
                     <p>Disediakan Oleh:</p>
                     <div className="doc-signature-line">
@@ -358,17 +359,19 @@ function App() {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
 
               <div className="doc-section" style={{ marginTop: '3rem' }}>
                 <div className="doc-section-title">BAHAGIAN C: KELULUSAN AKHIR</div>
                 <p><em>(Kegunaan Bahagian Komunikasi & Hal Ehwal Korporat)</em></p>
                 
-                <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-                  <strong>Kod Bajet Digunakan:</strong> {formData.kodBajet}
-                </div>
+                <div className="doc-box">
+                  <div style={{ marginBottom: '1rem' }}>
+                    <strong>Kod Bajet Digunakan:</strong> {formData.kodBajet}
+                  </div>
 
-                <div className="doc-signatures">
+                  <div className="doc-signatures" style={{ marginTop: '2rem' }}>
                   <div className="doc-signature-block">
                     <p>Disahkan Oleh:</p>
                     <div className="doc-signature-line">
