@@ -22,6 +22,7 @@ const initDB = async () => {
         jenis_aktiviti TEXT,
         kumpulan_sasaran TEXT,
         penceramah TEXT,
+        tentatif_program TEXT,
         kos_perbelanjaan NUMERIC,
         lain_lain_perbelanjaan NUMERIC,
         implikasi_anggota TEXT,

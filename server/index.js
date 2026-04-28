@@ -52,16 +52,16 @@ app.post('/api/proposals', upload.array('attachments', 10), async (req, res) => 
     const proposalQuery = `
       INSERT INTO proposals (
         tajuk, tarikh_tempat, masa, pengenalan, kehadiran, jenis_aktiviti, 
-        kumpulan_sasaran, penceramah, kos_perbelanjaan, lain_lain_perbelanjaan, 
+        kumpulan_sasaran, penceramah, tentatif_program, kos_perbelanjaan, lain_lain_perbelanjaan, 
         implikasi_anggota, roi_kuantitatif, disediakan_oleh, tarikh_disediakan, 
         disemak_oleh, tarikh_disemak, bajet_disokong, kod_bajet, 
         disahkan_oleh, tarikh_disahkan, diluluskan_oleh, tarikh_lulus
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
       RETURNING id;
     `;
     const proposalValues = [
       data.tajuk, data.tarikhTempat, data.masa, data.pengenalan, data.kehadiran, data.jenisAktiviti,
-      data.kumpulanSasaran, data.penceramah, data.kosPerbelanjaan || 0, data.lainLainPerbelanjaan || 0,
+      data.kumpulanSasaran, data.penceramah, data.tentatifProgram, data.kosPerbelanjaan || 0, data.lainLainPerbelanjaan || 0,
       data.implikasiAnggota, data.roiKuantitatif, data.disediakanOleh, data.tarikhDisediakan,
       data.disemakOleh, data.tarikhDisemak, data.bajetDisokong || 0, data.kodBajet,
       data.disahkanOleh, data.tarikhDisahkan, data.diluluskanOleh, data.tarikhLulus

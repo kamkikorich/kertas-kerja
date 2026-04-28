@@ -15,6 +15,7 @@ const defaultData = {
   jenisAktiviti: "Taklimat Skim PERKESO dan Kuiz, Ceramah Kesihatan (Asas CPR) dan Kuiz, Pelanggan bertuah, dan Penyampaian Faedah serta Kotak Prihatin PERKESO",
   kumpulanSasaran: "Orang Berinsurans Penerima Faedah, Surirumah & Pekerja Sendiri, serta Majikan",
   penceramah: "Walter Epor dari Pejabat Kesihatan Keningau",
+  tentatifProgram: "Rujuk Lampiran",
   kosPerbelanjaan: "860.00",
   lainLainPerbelanjaan: "1000.00",
   implikasiAnggota: "Tiada (Tidak berkaitan)",
@@ -222,6 +223,10 @@ function App() {
                 <input type="text" className="form-input" name="penceramah" value={formData.penceramah} onChange={handleChange} />
               </div>
               <div className="form-group">
+                <label>Tentatif Program</label>
+                <input type="text" className="form-input" name="tentatifProgram" value={formData.tentatifProgram} onChange={handleChange} />
+              </div>
+              <div className="form-group">
                 <label>Kos Perbelanjaan (RM)</label>
                 <input type="number" step="0.01" className="form-input" name="kosPerbelanjaan" value={formData.kosPerbelanjaan} onChange={handleChange} />
               </div>
@@ -414,6 +419,14 @@ function App() {
                 <div className="doc-item doc-box">
                   <div className="doc-item-num">5.</div>
                   <div className="doc-item-body">
+                    <div className="doc-item-title">Tentatif Program</div>
+                    <div className="doc-item-content">{formData.tentatifProgram}</div>
+                  </div>
+                </div>
+
+                <div className="doc-item doc-box">
+                  <div className="doc-item-num">6.</div>
+                  <div className="doc-item-body">
                     <div className="doc-item-title">Implikasi Kewangan</div>
                     <table className="doc-table">
                       <tbody>
@@ -435,7 +448,7 @@ function App() {
                 </div>
 
                 <div className="doc-item doc-box">
-                  <div className="doc-item-num">6.</div>
+                  <div className="doc-item-num">7.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Implikasi Perbelanjaan Anggota</div>
                     <div className="doc-item-content">{formData.implikasiAnggota}</div>
@@ -443,7 +456,7 @@ function App() {
                 </div>
 
                 <div className="doc-item doc-box">
-                  <div className="doc-item-num">7.</div>
+                  <div className="doc-item-num">8.</div>
                   <div className="doc-item-body">
                     <div className="doc-item-title">Anggaran Pulangan Pelaburan (ROI)</div>
                     <div className="doc-item-content">{formData.roiKuantitatif}</div>
