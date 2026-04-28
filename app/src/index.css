@@ -253,7 +253,7 @@ textarea.form-input {
   padding: 20mm;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   border: 1px solid #94a3b8;
-  margin-bottom: 2rem;
+  margin: 2rem auto;
   color: black;
   font-family: 'Arial', sans-serif; /* Standard document font */
 }
@@ -291,13 +291,14 @@ textarea.form-input {
 }
 
 .doc-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
   align-items: flex-start;
   border: 1px solid #cbd5e1;
   padding: 1.5rem;
   border-radius: 8px;
   background-color: #f8fafc;
+  width: 100%;
 }
 
 .doc-item-num {
@@ -334,6 +335,8 @@ textarea.form-input {
   display: flex;
   justify-content: space-between;
   margin-top: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .doc-signature-block {
