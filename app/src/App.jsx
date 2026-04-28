@@ -52,7 +52,7 @@ function App() {
       {/* Header */}
       <header className="header-bar">
         <h1>
-          <div className="logo-placeholder">P</div>
+          <img src="https://i.postimg.cc/15xdZ3RK/perkeso-logo.jpg" alt="PERKESO Logo" className="app-logo" />
           Penjana Kertas Cadangan PERKESO
         </h1>
         <div>
@@ -229,6 +229,7 @@ function App() {
           <div className="preview-content">
             <div className="document-page">
               <div className="doc-header">
+                <img src="https://i.postimg.cc/15xdZ3RK/perkeso-logo.jpg" alt="PERKESO Logo" className="doc-logo" />
                 <h1>{formData.tajuk}</h1>
                 <p><strong>Tarikh & Tempat:</strong> {formData.tarikhTempat}</p>
                 <p><strong>Masa:</strong> {formData.masa}</p>
