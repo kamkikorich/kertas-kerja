@@ -6,9 +6,11 @@ const defaultData = {
   tarikhTempat: "8 Oktober 2025, Pejabat PERKESO Keningau",
   masa: "9.30 Pagi sehingga 02.00 Petang",
   pengenalan: "Tujuan kertas cadangan adalah untuk mendapatkan kelulusan serta peruntukan kewangan daripada Bahagian Komunikasi & Hal Ehwal Korporat bagi melaksanakan program ini.",
-  objektif1: "Meraikan ulang tahun penubuhan PERKESO yang ke-54 sebagai tanda penghargaan.",
-  objektif2: "Memperingati peranan dan jasa bakti PERKESO dalam memberikan perlindungan keselamatan sosial sejak tahun 1971.",
-  objektif3: "Menunjukkan komitmen organisasi dalam memperkukuh kualiti penyampaian perkhidmatan dan meluaskan perlindungan.",
+  objektif: [
+    "Meraikan ulang tahun penubuhan PERKESO yang ke-54 sebagai tanda penghargaan.",
+    "Memperingati peranan dan jasa bakti PERKESO dalam memberikan perlindungan keselamatan sosial sejak tahun 1971.",
+    "Menunjukkan komitmen organisasi dalam memperkukuh kualiti penyampaian perkhidmatan dan meluaskan perlindungan."
+  ],
   kehadiran: "43 orang (1 Penceramah, 9 Urusetia, 33 Peserta)",
   jenisAktiviti: "Taklimat Skim PERKESO dan Kuiz, Ceramah Kesihatan (Asas CPR) dan Kuiz, Pelanggan bertuah, dan Penyampaian Faedah serta Kotak Prihatin PERKESO",
   kumpulanSasaran: "Orang Berinsurans Penerima Faedah, Surirumah & Pekerja Sendiri, serta Majikan",
@@ -35,6 +37,23 @@ function App() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleObjectiveChange = (index, value) => {
+    const newObjektif = [...formData.objektif];
+    newObjektif[index] = value;
+    setFormData(prev => ({ ...prev, objektif: newObjektif }));
+  };
+
+  const addObjective = () => {
+    setFormData(prev => ({ ...prev, objektif: [...prev.objektif, ""] }));
+  };
+
+  const removeObjective = (index) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      objektif: prev.objektif.filter((_, i) => i !== index) 
+    }));
   };
 
   const handlePrint = () => {
@@ -116,16 +135,33 @@ function App() {
                 />
               </div>
               <div className="form-group">
-                <label>Objektif 1</label>
-                <input type="text" className="form-input" name="objektif1" value={formData.objektif1} onChange={handleChange} />
-              </div>
-              <div className="form-group">
-                <label>Objektif 2</label>
-                <input type="text" className="form-input" name="objektif2" value={formData.objektif2} onChange={handleChange} />
-              </div>
-              <div className="form-group">
-                <label>Objektif 3</label>
-                <input type="text" className="form-input" name="objektif3" value={formData.objektif3} onChange={handleChange} />
+                <label>Objektif Program</label>
+                {formData.objektif.map((obj, index) => (
+                  <div key={index} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                    <input 
+                      type="text" 
+                      className="form-input" 
+                      value={obj} 
+                      onChange={(e) => handleObjectiveChange(index, e.target.value)} 
+                      placeholder={`Objektif ${index + 1}`}
+                    />
+                    <button 
+                      type="button" 
+                      onClick={() => removeObjective(index)}
+                      style={{ padding: '0 0.75rem', backgroundColor: '#fee2e2', color: '#ef4444', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+                      title="Padam"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+                <button 
+                  type="button" 
+                  onClick={addObjective}
+                  style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', backgroundColor: '#f1f5f9', border: '1px dashed #cbd5e1', borderRadius: '4px', cursor: 'pointer', width: '100%', color: '#475569', fontWeight: '500' }}
+                >
+                  + Tambah Objektif
+                </button>
               </div>
               <div className="form-group">
                 <label>Jumlah Kehadiran</label>
@@ -251,9 +287,9 @@ function App() {
                   <div className="doc-item-body">
                     <div className="doc-item-title">Objektif</div>
                     <ul className="doc-list">
-                      {formData.objektif1 && <li>{formData.objektif1}</li>}
-                      {formData.objektif2 && <li>{formData.objektif2}</li>}
-                      {formData.objektif3 && <li>{formData.objektif3}</li>}
+                      {formData.objektif && formData.objektif.map((obj, index) => (
+                        obj.trim() !== "" ? <li key={index}>{obj}</li> : null
+                      ))}
                     </ul>
                   </div>
                 </div>
