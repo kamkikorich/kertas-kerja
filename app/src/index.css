@@ -355,8 +355,10 @@ textarea.form-input {
 
 /* Print specific styles */
 @media print {
-  body {
+  body, .app-container, .split-pane, .preview-panel, .preview-content {
     background-color: white;
+    height: auto !important;
+    overflow: visible !important;
   }
   .header-bar, .form-panel, .preview-header {
     display: none !important;
