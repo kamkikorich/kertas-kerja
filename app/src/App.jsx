@@ -33,6 +33,8 @@ const defaultData = {
 
 function App() {
   const [formData, setFormData] = useState(defaultData);
+  const [attachments, setAttachments] = useState([]);
+  const [previewUrls, setPreviewUrls] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,8 +58,48 @@ function App() {
     }));
   };
 
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      setAttachments(prev => [...prev, ...filesArray]);
+      
+      const newPreviews = filesArray.map(file => URL.createObjectURL(file));
+      setPreviewUrls(prev => [...prev, ...newPreviews]);
+    }
+  };
+
+  const removeAttachment = (index) => {
+    setAttachments(prev => prev.filter((_, i) => i !== index));
+    setPreviewUrls(prev => prev.filter((_, i) => i !== index));
+  };
+
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleSave = async () => {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('data', JSON.stringify(formData));
+      
+      attachments.forEach(file => {
+        formDataToSend.append('attachments', file);
+      });
+      
+      const res = await fetch('http://localhost:5000/api/proposals', {
+        method: 'POST',
+        body: formDataToSend
+      });
+      
+      const result = await res.json();
+      if (result.success) {
+        alert('Kertas Cadangan berjaya disimpan di pangkalan data!');
+      } else {
+        alert('Ralat: ' + result.error);
+      }
+    } catch (err) {
+      alert('Gagal menyambung ke pelayan backend. Pastikan pelayan Node.js sedang berjalan.');
+    }
   };
 
   const calculateTotal = () => {
@@ -245,6 +287,38 @@ function App() {
               </div>
             </div>
 
+            <div className="form-section">
+              <h3>Bahagian D: Lampiran</h3>
+              <div className="form-group">
+                <label>Muat Naik Gambar / Resit / Sebut Harga (Maks 10 fail)</label>
+                <input 
+                  type="file" 
+                  multiple 
+                  accept="image/png, image/jpeg, image/jpg" 
+                  className="form-input"
+                  onChange={handleFileChange} 
+                />
+                
+                {previewUrls.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1rem' }}>
+                    {previewUrls.map((url, i) => (
+                      <div key={i} style={{ position: 'relative' }}>
+                        <img 
+                          src={url} 
+                          alt={`Preview ${i+1}`} 
+                          style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #cbd5e1' }} 
+                        />
+                        <button 
+                          onClick={() => removeAttachment(i)}
+                          style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'red', color: 'white', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '10px' }}
+                        >✕</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -252,14 +326,19 @@ function App() {
         <div className="preview-panel">
           <div className="preview-header">
             <h2>Pratonton Langsung</h2>
-            <button className="btn btn-primary" onClick={handlePrint}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                <rect x="6" y="14" width="12" height="8"></rect>
-              </svg>
-              Cetak / PDF
-            </button>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <button className="btn btn-secondary" onClick={handleSave} style={{ backgroundColor: '#10b981', color: 'white' }}>
+                Simpan ke Database
+              </button>
+              <button className="btn btn-primary" onClick={handlePrint}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Cetak / PDF
+              </button>
+            </div>
           </div>
           
           <div className="preview-content">
@@ -427,6 +506,15 @@ function App() {
               </div>
               </div>
             </div>
+
+            {/* Attachment Pages */}
+            {previewUrls.map((url, index) => (
+              <div className="document-page" key={`attachment-${index}`} style={{ pageBreakBefore: 'always', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <h2 style={{ marginBottom: '2rem', textDecoration: 'underline' }}>LAMPIRAN {index + 1}</h2>
+                <img src={url} alt={`Lampiran ${index + 1}`} style={{ maxWidth: '100%', maxHeight: '230mm', objectFit: 'contain' }} />
+              </div>
+            ))}
+
           </div>
         </div>
 
