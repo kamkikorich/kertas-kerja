@@ -27,7 +27,8 @@
       "Bash(Select-Object Name)",
       "Bash(pipx list *)",
       "Bash(findstr /i \"image\")",
-      "Bash(pipx runpip *)"
+      "Bash(pipx runpip *)",
+      "Bash(dir C:\\\\Users\\\\User\\\\pipx\\\\venvs\\\\imagesorcery-mcp\\\\Scripts\\\\imagesorcery-mcp* *)"
     ]
   }
 }
