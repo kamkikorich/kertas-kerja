@@ -259,8 +259,9 @@ textarea.form-input {
   max-width: 800px;
   min-height: 1131px; /* A4 aspect ratio approximation */
   padding: 4rem 3.5rem;
-  box-shadow: var(--shadow-lg);
-  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
   margin-bottom: 2rem;
   color: black;
   font-family: 'Arial', sans-serif; /* Standard document font */
@@ -293,9 +294,13 @@ textarea.form-input {
 }
 
 .doc-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: flex-start;
+  border: 1px solid #cbd5e1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #f8fafc;
 }
 
 .doc-item-num {
@@ -366,11 +371,18 @@ textarea.form-input {
   }
   .document-page {
     box-shadow: none;
+    border: none;
     margin: 0;
     padding: 0;
     max-width: none;
     width: 100%;
     min-height: auto;
+  }
+  .doc-item {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    margin-bottom: 1rem;
   }
   @page {
     margin: 2cm;
