@@ -242,7 +242,8 @@ textarea.form-input {
   padding: 2rem;
   overflow-y: auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* The Document Page */
@@ -256,6 +257,7 @@ textarea.form-input {
   margin: 2rem auto;
   color: black;
   font-family: 'Arial', sans-serif; /* Standard document font */
+  flex-shrink: 0;
 }
 
 .doc-header {
