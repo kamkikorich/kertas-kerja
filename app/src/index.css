@@ -290,15 +290,18 @@ textarea.form-input {
   margin-bottom: 1rem;
 }
 
-.doc-item {
+.doc-box {
   margin-bottom: 2rem;
-  display: flex;
-  align-items: flex-start;
   border: 1px solid #cbd5e1;
   padding: 1.5rem;
   border-radius: 8px;
   background-color: #f8fafc;
   width: 100%;
+}
+
+.doc-item {
+  display: flex;
+  align-items: flex-start;
 }
 
 .doc-item-num {
@@ -380,7 +383,7 @@ textarea.form-input {
     width: 100%;
     min-height: auto;
   }
-  .doc-item {
+  .doc-box {
     border: none;
     padding: 0;
     background-color: transparent;
