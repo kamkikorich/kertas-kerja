@@ -30,7 +30,18 @@
       "Bash(pipx runpip *)",
       "Bash(dir C:\\\\Users\\\\User\\\\pipx\\\\venvs\\\\imagesorcery-mcp\\\\Scripts\\\\imagesorcery-mcp* *)",
       "Read(//c/Users/User/**)",
-      "Bash(cat %USERPROFILE%\\\\.claude.json)"
+      "Bash(cat %USERPROFILE%\\\\.claude.json)",
+      "mcp__browseros__browseros_info",
+      "mcp__browseros__list_pages",
+      "mcp__browseros__click",
+      "mcp__browseros__get_page_content",
+      "mcp__browseros__scroll",
+      "mcp__browseros__navigate_page",
+      "mcp__browseros__fill",
+      "mcp__browseros__get_active_page",
+      "mcp__browseros__get_console_logs",
+      "mcp__browseros__evaluate_script",
+      "Bash(git add *)"
     ]
   }
 }
