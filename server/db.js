@@ -10,7 +10,38 @@ const pool = new Pool({
   ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
 });
 
+const createDatabaseIfNotExists = async () => {
+  const dbName = process.env.DB_NAME || 'perkeso_db';
+  const adminPool = new Pool({
+    user: process.env.DB_USER || 'postgres',
+    host: process.env.DB_HOST || 'localhost',
+    database: 'postgres',
+    password: process.env.DB_PASSWORD || 'password',
+    port: process.env.DB_PORT || 5432,
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
+  });
+
+  try {
+    const result = await adminPool.query(
+      'SELECT 1 FROM pg_database WHERE datname = $1',
+      [dbName]
+    );
+    if (result.rowCount === 0) {
+      await adminPool.query(`CREATE DATABASE "${dbName}"`);
+      console.log(`Database "${dbName}" created successfully.`);
+    } else {
+      console.log(`Database "${dbName}" already exists.`);
+    }
+  } catch (err) {
+    console.error('Error checking/creating database:', err);
+  } finally {
+    await adminPool.end();
+  }
+};
+
 const initDB = async () => {
+  await createDatabaseIfNotExists();
+
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS proposals (
