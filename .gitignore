@@ -26,6 +26,13 @@ server/.env
 # Claude local settings
 .claude/settings.local.json
 
+# Vite cache
+.vite/
+
+# Ignore large binary files
+*.png
+*.pdf
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

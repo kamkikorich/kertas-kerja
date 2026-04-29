@@ -41,7 +41,8 @@
       "mcp__browseros__get_active_page",
       "mcp__browseros__get_console_logs",
       "mcp__browseros__evaluate_script",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
