@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
+import PrintDocument from '../components/PrintDocument';
 import { createProposal } from '../utils/api';
-import { Save, RotateCcw, Plus, X, Upload } from 'lucide-react';
+import { Save, RotateCcw, Plus, X, Upload, Eye, EyeOff, Printer } from 'lucide-react';
 
 const defaultData = {
   tajuk: '',
@@ -46,6 +47,7 @@ export default function ProposalForm() {
   const [previews, setPreviews] = useState([]);
   const [saving, setSaving] = useState(false);
   const [alert, setAlert] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
   const navigate = useNavigate();
 
   const set = (name, value) => setFormData(prev => ({ ...prev, [name]: value }));
@@ -108,10 +110,21 @@ export default function ProposalForm() {
       )}
 
       {/* Action bar */}
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap' }} className="no-print">
+      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }} className="no-print">
         <button className="btn btn-success" onClick={handleSave} disabled={saving}>
           {saving ? <><div className="spinner" /> Menyimpan...</> : <><Save size={16} /> Simpan ke Database</>}
         </button>
+        <button
+          className={`btn ${showPreview ? 'btn-primary' : 'btn-ghost'}`}
+          onClick={() => setShowPreview(p => !p)}
+        >
+          {showPreview ? <><EyeOff size={16} /> Sembunyikan Pratonton</> : <><Eye size={16} /> Pratonton PDF</>}
+        </button>
+        {showPreview && (
+          <button className="btn btn-ghost" onClick={() => window.print()}>
+            <Printer size={16} /> Cetak
+          </button>
+        )}
         <button className="btn btn-ghost" onClick={() => setFormData(defaultData)}>
           <RotateCcw size={16} /> Reset
         </button>
@@ -256,12 +269,34 @@ export default function ProposalForm() {
         </div>
 
         {/* Bottom save */}
-        <div style={{ display: 'flex', gap: '0.75rem', paddingBottom: '2rem' }} className="no-print">
+        <div style={{ display: 'flex', gap: '0.75rem', paddingBottom: '1rem' }} className="no-print">
           <button className="btn btn-success" onClick={handleSave} disabled={saving} style={{ flex: 1, justifyContent: 'center', padding: '0.85rem' }}>
             {saving ? <><div className="spinner" /> Menyimpan...</> : <><Save size={18} /> Simpan Kertas Cadangan</>}
           </button>
         </div>
       </div>
+
+      {/* Live Preview Panel */}
+      {showPreview && (
+        <div style={{ marginTop: '2rem' }} id="print-wrapper">
+          <div className="no-print" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginBottom: '1rem', padding: '0.75rem 1rem',
+            background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 8
+          }}>
+            <span style={{ fontSize: '0.875rem', color: '#1e40af', fontWeight: 600 }}>
+              👁️ Pratonton langsung — dokumen dikemas kini secara automatik
+            </span>
+            <button className="btn btn-primary btn-sm" onClick={() => window.print()}>
+              <Printer size={14} /> Cetak / PDF
+            </button>
+          </div>
+          <PrintDocument
+            data={formData}
+            objectives={formData.objektif || []}
+          />
+        </div>
+      )}
     </Layout>
   );
 }
